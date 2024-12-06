@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import Card from '../components/card';
+import images from '../Assets/Images';
 
 export default function GPAndOrtho() {
   return (
@@ -10,11 +12,6 @@ export default function GPAndOrtho() {
             style={styles.image}
             source={require('../Assets/backarrow.png')}></Image>
         </View>
-        <View>
-          <Image
-            style={styles.image}
-            source={require('../Assets/navicon.png')}></Image>
-        </View>
       </View>
 
       {/* Header Section */}
@@ -23,15 +20,6 @@ export default function GPAndOrtho() {
       </View>
 
       {/* Subheading */}
-      <View style={styles.subHeader}>
-        <Text style={styles.subHeaderText}>Lorem Ipsum</Text>
-        <TouchableOpacity>
-          <Text style={styles.viewAllText}>View All</Text>
-          <Image
-            style={styles.viewimage}
-            source={require('../Assets/viewall.png')}></Image>
-        </TouchableOpacity>
-      </View>
 
       {/* Content Sections */}
       <View style={styles.card}>
@@ -45,7 +33,7 @@ export default function GPAndOrtho() {
           <View style={styles.fullcard}>
             <Text style={styles.cardTitle}>IMAGE</Text>
             <Text style={styles.cardDescription}>
-              Lorem ipsum dolor sit amet.
+              Lorem ipsum dolor sit amets.
             </Text>
             <Text style={styles.cardDescription}>
               Lorem ipsum dolor sit amet.
@@ -53,6 +41,8 @@ export default function GPAndOrtho() {
           </View>
         </View>
       </View>
+
+      <Card cardname="SKIN CARE" imageUrl={require('../Assets/image3.jpeg')} />
 
       <View style={[styles.card, styles.pdfCard]}>
         <View style={styles.cardContent}>
@@ -109,22 +99,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#354169',
   },
-  subHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  subHeaderText: {
-    fontSize: 18,
-    fontWeight: '900',
-    color: '#354169',
-  },
-  viewAllText: {
-    fontSize: 14,
-    color: '#354169',
-    fontWeight: 'bold',
-  },
+
   viewimage: {
     width: 10,
     height: 10,

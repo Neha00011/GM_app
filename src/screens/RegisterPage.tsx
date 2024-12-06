@@ -1,46 +1,60 @@
 import React, {useState} from 'react';
 import {
   Image,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
-export default function Page3() {
-  const [isChecked, setIsChecked] = useState(false);
+import Button from '../components/button1';
 
+import InputField from '../components/inputField';
+import {useNavigation} from '@react-navigation/native';
+
+export default function RegisterPage() {
+  const [isChecked, setIsChecked] = useState(false);
+  const [hide, setHide] = useState(true);
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../Assets/backarrow.png')}
-        style={styles.backButton}
-      />
+    <ScrollView
+      contentContainerStyle={{
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}
+      style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Image
+          source={require('../Assets/backarrow.png')}
+          style={styles.backButton}
+        />
+      </TouchableOpacity>
 
       <Text style={styles.title}>Register Now</Text>
       <Text style={styles.subtitle}>Welcome!!</Text>
 
       <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Full Name"
-          placeholderTextColor="#FFF"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor="#FFF"
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#FFF"
-          secureTextEntry
-        />
+        <View style={styles.input}>
+          <InputField buttonName="Full name" />
+        </View>
+        <View style={styles.input}>
+          <InputField buttonName="Email" />
+        </View>
+        <View style={styles.input}>
+          <InputField buttonName="Password" type={hide} />
+          <TouchableOpacity
+            onPress={() => {
+              setHide(!hide);
+            }}>
+            <Text style={styles.hidebutton}>{hide ? 'show' : 'hide'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.checkboxContainer}>
@@ -56,29 +70,30 @@ export default function Page3() {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.signupButton}>
-        <Text style={styles.signupText}>Sign Up</Text>
-      </TouchableOpacity>
+      <View style={styles.inputContainer}>
+        <Button buttonName="Sign Up" />
+      </View>
 
       <Text style={styles.loginText}>
         Already Register? <Text style={styles.loginLink}>Login</Text>
       </Text>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    //height: '100%',
+    //display: 'flex',
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+    //justifyContent: 'space-between',
   },
   backButton: {
     width: 20,
     height: 20,
     position: 'absolute',
-    top: 50,
+    top: 18,
     left: 20,
   },
   backText: {
@@ -89,35 +104,37 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 5,
+
+    marginTop: 35,
     color: '#354169',
   },
   subtitle: {
     fontSize: 18,
-    marginBottom: 40,
-    marginTop: 40,
+    marginBottom: 20,
+    marginTop: 20,
     color: '#354169',
     marginRight: 30,
     fontWeight: '800',
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 4,
+    marginLeft: 20,
   },
   input: {
     backgroundColor: '#354169',
     color: '#FFF',
     fontSize: 16,
-    padding: 15,
-    borderRadius: 30,
-    marginBottom: 30,
+    padding: 2,
+    borderRadius: 35,
+    marginBottom: 20,
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 40,
   },
   checkbox: {
-    marginRight: 10,
+    marginRight: 2,
   },
   checkboxText: {
     fontSize: 14,
@@ -146,9 +163,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
     fontWeight: '800',
+    marginBottom: 70,
   },
   loginLink: {
     color: '#354169',
+    fontWeight: 'bold',
+  },
+  hidebutton: {
+    left: 300,
+    top: -40,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
