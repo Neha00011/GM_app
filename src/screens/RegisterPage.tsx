@@ -13,20 +13,22 @@ import Button from '../components/button1';
 
 import InputField from '../components/inputField';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
+
+type RegisterPageNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Register'
+>;
 
 export default function RegisterPage() {
   const [isChecked, setIsChecked] = useState(false);
   const [hide, setHide] = useState(true);
-  const navigation = useNavigation();
+  const navigation = useNavigation<RegisterPageNavigationProp>();
   return (
-    <ScrollView
-      contentContainerStyle={{
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-      style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity
+        style={styles.backButton}
         onPress={() => {
           navigation.goBack();
         }}>
@@ -46,7 +48,7 @@ export default function RegisterPage() {
         <View style={styles.input}>
           <InputField buttonName="Email" />
         </View>
-        <View style={styles.input}>
+        <View style={styles.inputPassword}>
           <InputField buttonName="Password" type={hide} />
           <TouchableOpacity
             onPress={() => {
@@ -71,30 +73,42 @@ export default function RegisterPage() {
       </View>
 
       <View style={styles.inputContainer}>
-        <Button buttonName="Sign Up" />
+        <Button
+          buttonName="Sign Up"
+          onClick={() => {
+            navigation.navigate('HomePage');
+          }}
+        />
       </View>
 
       <Text style={styles.loginText}>
-        Already Register? <Text style={styles.loginLink}>Login</Text>
+        Already Register?{' '}
+        <Text
+          style={styles.loginLink}
+          onPress={() => {
+            navigation.navigate('Login');
+          }}>
+          Login
+        </Text>
       </Text>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    //height: '100%',
-    //display: 'flex',
     backgroundColor: '#fff',
-    paddingHorizontal: 15,
-    //justifyContent: 'space-between',
+    paddingHorizontal: 25,
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   backButton: {
     width: 20,
     height: 20,
     position: 'absolute',
-    top: 18,
-    left: 20,
+    top: 16,
+    left: 10,
   },
   backText: {
     fontSize: 24,
@@ -118,13 +132,22 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     marginBottom: 4,
-    marginLeft: 20,
+    //marginLeft: 20,
   },
   input: {
     backgroundColor: '#354169',
     color: '#FFF',
     fontSize: 16,
-    padding: 2,
+    // padding: 2,
+    borderRadius: 35,
+    marginBottom: 20,
+  },
+  inputPassword: {
+    position: 'relative',
+    backgroundColor: '#354169',
+    color: '#FFF',
+    fontSize: 16,
+    // padding: 2,
     borderRadius: 35,
     marginBottom: 20,
   },
@@ -171,8 +194,14 @@ const styles = StyleSheet.create({
   },
   hidebutton: {
     left: 300,
-    top: -40,
+    top: -45,
+    color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
+    position: 'absolute',
+  },
+  linkStyling: {
+    color: '#354169',
     fontWeight: 'bold',
   },
 });

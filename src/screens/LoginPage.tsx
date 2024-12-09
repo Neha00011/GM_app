@@ -11,12 +11,20 @@ import React, {useState} from 'react';
 import {Icon} from 'react-icons-kit';
 import {eyeoff} from 'react-icons-kit/feather/eyeOff';
 import {eye} from 'react-icons-kit/feather/eye';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
 
-export default function page2() {
+type LoginPageNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Login'
+>;
+
+export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeoff);
-
+  const navigation = useNavigation<LoginPageNavigationProp>();
   const handleToggle = () => {
     if (type == 'password') {
       setIcon(eye);
@@ -29,17 +37,24 @@ export default function page2() {
   const {height, width} = Dimensions.get('window');
   return (
     <View style={[styles.container, {height}]}>
-      <Image
-        source={require('../Assets/backarrow.png')}
-        style={styles.backbutton}
-      />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}>
+        <Image
+          source={require('../Assets/backarrow.png')}
+          style={styles.backbutton}
+        />
+      </TouchableOpacity>
 
       <Text style={styles.title}>Login</Text>
       <Text style={styles.subtitle}>Welcome!!</Text>
 
       <View style={styles.inputContainer}>
         <View style={styles.labelContainer}>
-          <Text>Email</Text>
+          <Text style={{fontSize: 18, color: 'black', fontWeight: '900'}}>
+            Email
+          </Text>
         </View>
         <View style={styles.inputBox}>
           <TextInput
@@ -56,10 +71,12 @@ export default function page2() {
             style={styles.input}></TextInput>
           {type == 'password' ? (
             <TouchableOpacity onPress={() => setType('text')}>
-              <Text>show</Text>
+              <Text style={styles.showbtn}>show</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => setType('password')}>
+            <TouchableOpacity
+              style={styles.showbtn}
+              onPress={() => setType('password')}>
               <Text>hide</Text>
             </TouchableOpacity>
           )}
@@ -68,7 +85,11 @@ export default function page2() {
           <Text style={styles.forgotText}>Forgot Password ?</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={() => {
+          navigation.navigate('HomePage');
+        }}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
@@ -84,14 +105,23 @@ export default function page2() {
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            source={require('../Assets/facebook.png')}
+            source={{
+              uri: 'https://cdn-icons-png.freepik.com/256/5968/5968764.png?ga=GA1.1.2032391902.1733553864&semt=ais_hybrid',
+            }}
             style={styles.icon}
           />
         </TouchableOpacity>
       </View>
       <Text style={styles.registerText}>
         Don`t have an account yet?
-        <Text style={styles.registerLink}>Register now</Text>
+        <Text
+          style={styles.registerLink}
+          onPress={() => {
+            navigation.navigate('Register');
+          }}>
+          {' '}
+          Register now
+        </Text>
       </Text>
     </View>
   );
@@ -108,8 +138,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     position: 'absolute',
-    top: 50,
-    left: 20,
+    top: -12,
+    left: 4,
   },
   title: {
     color: '#354169',
@@ -127,6 +157,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   inputContainer: {
+    position: 'relative',
     marginBottom: 20,
   },
   label: {
@@ -139,10 +170,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     backgroundColor: 'white',
     borderRadius: 30,
-    padding: 20,
+    padding: 8,
     marginBottom: 15,
     marginTop: 15,
     borderWidth: 2,
+    position: 'relative',
   },
   input: {
     fontSize: 15,
@@ -187,8 +219,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   icon: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     marginHorizontal: 10,
     marginTop: 30,
   },
@@ -206,9 +238,15 @@ const styles = StyleSheet.create({
   labelContainer: {
     backgroundColor: 'white',
     alignSelf: 'flex-start',
-    zIndex: -1,
-    elevation: 1,
+    zIndex: 10,
+    // elevation: 1,
     position: 'absolute',
-    top: -5,
+    top: 5,
+    left: 30,
+  },
+  showbtn: {
+    position: 'absolute',
+    right: 10,
+    top: -32,
   },
 });

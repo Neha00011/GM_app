@@ -9,9 +9,17 @@ import {
 import React from 'react';
 import Button from '../components/button1';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
+
+type LandingPageNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
+
 const {width, height} = Dimensions.get('window');
-export default function landingPage() {
-  const navigation = useNavigation();
+export default function LandingPage() {
+  const navigation = useNavigation<LandingPageNavigationProp>();
   return (
     <View style={[styles.container, {height}]}>
       <Image
@@ -24,12 +32,14 @@ export default function landingPage() {
         style={styles.illustration2}
       />
 
-      <Button
-        buttonName="Get Started"
-        onClick={() => {
-          navigation.navigate('Login');
-        }}
-      />
+      <View style={styles.btnstyle}>
+        <Button
+          buttonName="Get Started"
+          onClick={() => {
+            navigation.navigate('Register');
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -53,5 +63,7 @@ const styles = StyleSheet.create({
     width: '43%',
     resizeMode: 'contain',
   },
-  btnstyle: {},
+  btnstyle: {
+    width: '90%',
+  },
 });

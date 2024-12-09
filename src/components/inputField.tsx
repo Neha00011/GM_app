@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     height: 70,
-    width: '99%',
+    width: '100%',
   },
   buttonText: {
     textAlign: 'left',

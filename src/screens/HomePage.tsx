@@ -8,8 +8,17 @@ import {
   ScrollView,
 } from 'react-native';
 import Card from '../components/card';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../App';
+
+type HomePageNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'HomePage'
+>;
 
 export default function App() {
+  const navigation = useNavigation<HomePageNavigationProp>();
   return (
     <View style={styles.container}>
       <View>
@@ -21,18 +30,27 @@ export default function App() {
         <Card
           cardname="GP and ORTHO"
           imageUrl={require('../Assets/image1.jpeg')}
+          onClick={() => {
+            navigation.navigate('GPAndOrtho');
+          }}
         />
 
         {/* Gynecology */}
         <Card
           cardname="GYNECOLOGY"
           imageUrl={require('../Assets/image2.jpeg')}
+          onClick={() => {
+            navigation.navigate('Gynecology');
+          }}
         />
 
         {/* Skin Care */}
         <Card
           cardname="SKIN CARE"
           imageUrl={require('../Assets/image3.jpeg')}
+          onClick={() => {
+            navigation.navigate('SkinCare');
+          }}
         />
       </View>
     </View>

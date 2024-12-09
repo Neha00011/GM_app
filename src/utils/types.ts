@@ -7,3 +7,7 @@ export interface props {
   type?: any;
   onClick?: () => void;
 }
+
+export interface Prop {
+  imageUrl: ImageSourcePropType;
+}
