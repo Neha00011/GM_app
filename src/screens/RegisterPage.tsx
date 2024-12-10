@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import CheckBox from 'react-native-check-box';
 
 import Button from '../components/button1';
 
@@ -61,9 +61,12 @@ export default function RegisterPage() {
 
       <View style={styles.checkboxContainer}>
         <CheckBox
-          value={isChecked}
-          onValueChange={setIsChecked}
+          onClick={() => {
+            setIsChecked(!isChecked);
+          }}
+          isChecked={isChecked}
           style={styles.checkbox}
+          checkBoxColor="#354169"
         />
 
         <Text style={styles.checkboxText}>
@@ -158,6 +161,10 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginRight: 2,
+    //borderColor: 'red',
+    //borderWidth: 1,
+
+    // backgroundColor: 'red',
   },
   checkboxText: {
     fontSize: 14,
@@ -193,8 +200,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   hidebutton: {
-    left: 300,
+    left: 290,
     top: -45,
+
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',

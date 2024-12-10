@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   fullcard: {
+    height: '25%',
     top: -130,
     marginLeft: 130,
   },

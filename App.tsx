@@ -8,7 +8,7 @@ import LoginPage from './src/screens/LoginPage';
 import Gynecology from './src/screens/Gynecology';
 import SkinCare from './src/screens/SkinCare';
 import ImagePage from './src/screens/ImagePage';
-import Pdf from './src/screens/Pdf';
+import Pdf from './src/screens/PdfPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
